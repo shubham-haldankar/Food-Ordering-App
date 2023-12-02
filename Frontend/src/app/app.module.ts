@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { CardsComponent } from './cards/cards.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MenuBarComponent,
-    CardsComponent
+    CardsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
