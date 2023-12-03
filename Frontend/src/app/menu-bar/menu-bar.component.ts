@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { foodItem } from '../datatypes';
+import { restaurant } from '../datatypes';
+import { RestaurantService } from '../services/restaurant.service';
 
 @Component({
   selector: 'app-menu-bar',
@@ -8,12 +9,22 @@ import { foodItem } from '../datatypes';
   styleUrls: ['./menu-bar.component.css']
 })
 export class MenuBarComponent {
-  searchResult: foodItem[] | undefined;
+  searchResult: restaurant[] | undefined;
 
-  constructor(private router:Router) {}
+  constructor(private router:Router, private restaurantService:RestaurantService) {}
 
   suggestions(query:KeyboardEvent){
-    console.log(query)
+    if(query){
+      const element= query.target as HTMLInputElement
+      this.restaurantService.search(element.value).subscribe(result=>{
+        if(result.length>5){
+          result.length= 5
+        }
+        this.searchResult=result
+      })
+      
+      console.log(this.searchResult)
+    }
   }
 
   hideSearch(){
@@ -21,11 +32,13 @@ export class MenuBarComponent {
   }
 
   submitSearch(searchInput:string){
-    console.log(searchInput)
+    if(searchInput){
+      this.router.navigate([`/search/${searchInput}`])
+    }
   }
 
   explorePage(rsId:number){
-    console.log(rsId)
+    this.router.navigate(['/explore',rsId])
   }
 
   checkout(){
