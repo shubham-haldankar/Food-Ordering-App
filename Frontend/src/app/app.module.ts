@@ -8,6 +8,7 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { CardsComponent } from './cards/cards.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CartComponent } from './cart/cart.component';
     MenuBarComponent,
     CardsComponent,
     PageNotFoundComponent,
-    CartComponent
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
