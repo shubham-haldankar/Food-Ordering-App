@@ -18,4 +18,8 @@ export class RestaurantService {
   search(q:string){
     return this.http.get<restaurant[]>(this.rUrl+`?q=${encodeURIComponent(q)}`)
   }
+
+  getRestaurantDetails(rsId:number){
+    return this.http.get<restaurant>(this.rUrl+"/"+rsId)
+  }
 }

@@ -1,1 +1,84 @@
-<p>explore works!</p>
+<h2 class="text-center menuHeading mb-4">Welcome to {{restaurantName}}</h2>
+
+<div class="row" *ngIf="foodArray?.length">
+    <div class="col-sm-6 col-lg-4 col-xl-3 px-3 mb-5" id="foodCard" *ngFor="let food of foodArray">
+        <div class="card shadow card-width mx-auto">
+            <img class="card-img-top" id="foodImage" src="assets/{{food.image}}" alt="{{food.name}}" height="200px">
+            <div class="card-body text text-center">
+                <h5 class="card-title py-2" id="foodName" style="color: white; background-color: black;">{{food.name | titlecase}}</h5>
+                <div class="borderBottom px-3 py-1">
+                    <h6 class="one-line-text" id="foodPrice">Price: {{food.price | currency: "INR" : "symbol" : "1.0-0"}}</h6>
+                    <h6 class="one-line-text" id="foodRating">Rating: {{food.rating}}<i class="fa-solid fa-star fa-xs" style="color: #fcc2a2;"></i></h6>
+                    <h6 class="one-line-text" id="foodDiscount">Discount: {{food.discount/100 | percent}}</h6>
+                </div>
+                <button class="btn btn-success mt-2 px-4" id="addItem" data-bs-toggle="modal" data-bs-target="#addCartModal" (click)="selectItem(food)">Add <i class="fa-solid fa-plus fa-sm" style="color: #ffffff;"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addCartModal" tabindex="-1" aria-labelledby="addCartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" *ngIf="selectedItem">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCartModalLabel">{{selectedItem.name}} <sup>{{selectedItem.rating}}<i class="fa-solid fa-star fa-xs" style="color: #fcc2a2;"></i></sup></h5>
+                    <br>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-center borderBottom pb-3">Price Details</h5>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4 text-end borderBottom">
+                                <h6>Price</h6>
+                                <h6>Quantity</h6>
+                            </div>
+                            <div class="col-4 text-center borderBottom">
+                                <h6 class="d-inline">{{discountedPrice | currency: "INR" : "symbol" : "1.0-0"}} </h6> <span class="text-decoration-line-through text-muted">{{selectedItem.price | currency: "INR" : "symbol" : "1.0-0"}}</span>
+                                <h6>{{selectedQuantity}}</h6>
+                            </div>
+                            <div class="col-4 text-start borderBottom">
+                                <h6>per item</h6>
+                                <br>
+                            </div>
+                        </div>
+
+                        <div class="row py-2">
+                            <div class="col-4 text-end">
+                                <h6>Subtotal</h6>
+                            </div>
+                            <div class="col-4 text-center">
+                                <h6>{{discountedPrice}} x {{selectedQuantity}} = {{selectedTotal | currency: "INR" : "symbol" : "1.0-0"}}</h6>
+                            </div>
+                            <div class="col-4 text-start">
+                                <br>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4 offset-4">
+                                <form class="form-inline">
+                                    <div class="input-group">
+                                        <button class="btn btn-danger" (click)="decrement()"><i class="fa-solid fa-minus fa-sm" style="color: #ffffff;"></i></button>
+                                        <input class="form-control text-center" type="number" (keyup)="onKey($event)" [(ngModel)]="selectedQuantity" name="quantity">
+                                        <button class="btn btn-success" (click)="increment()"><i class="fa-solid fa-plus fa-sm" style="color: #ffffff;"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="row py-2">
+                            <div class="col-12 text-success text-center">
+                                You will <b>saved {{(selectedItem.price-discountedPrice)*selectedQuantity | currency: "INR" : "symbol" : "1.0-0"}}</b> on this item!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updatingCart()">Add to cart {{selectedTotal | currency: "INR" : "symbol" : "1.0-0"}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
