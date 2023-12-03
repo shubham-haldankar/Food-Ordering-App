@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { restaurant } from '../datatypes';
 
 @Component({
   selector: 'app-cards',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./cards.component.css']
 })
 export class CardsComponent {
+
+  @Input()
+  restaurants:restaurant[] | undefined;
 
 }

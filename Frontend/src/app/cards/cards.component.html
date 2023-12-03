@@ -1,1 +1,24 @@
-<p>cards works!</p>
+<div class="row" *ngIf="restaurants?.length">
+    <div class="col-sm-6 col-lg-4 col-xl-3 px-3 mb-5" id="restaurantCard" *ngFor="let restaurant of restaurants; index as i">
+        <div class="card shadow card-width mx-auto" [routerLink]="restaurant.menu.length? '/explore/'+restaurant.id: '/'" [ngClass]="restaurant.menu.length? 'cursor-pointer': ''">
+            <img class="card-img-top" id="restaurantImage" src="assets/{{restaurant.image}}" alt="{{restaurant.name}}" height="200px">
+            <div class="card-body text text-center">
+                <h5 class="card-title py-2" id="restaurantName" style="color: white; background-color: black;">{{restaurant.name | titlecase}}</h5>
+                <div class="px-3 py-1">
+                    <h6 class="one-line-text" id="restaurantCategory" *ngIf="restaurant.category; else categoryMessage">Category: {{restaurant.category | titlecase}}</h6>
+                    <ng-template #categoryMessage>
+                        <h6 class="one-line-text" id="restaurantCategoryMessage">Menu not added</h6>
+                    </ng-template>
+                    <h6 class="one-line-text" id="restaurantRating" *ngIf="restaurant.noOfRatings; else ratingMessage">Rating: {{restaurant.rating}}<i class="fa-solid fa-star fa-xs" style="color: #fcc2a2;"></i>({{restaurant.noOfRatings}})</h6>
+                    <ng-template #ratingMessage>
+                        <h6 class="one-line-text" id="restaurantRatingMessage">No ratings yet</h6>
+                    </ng-template>
+                    <h6 class="one-line-text" id="restaurantDiscount" *ngIf="restaurant.maxDiscount; else discountMessage">Max Discount: {{restaurant.maxDiscount/100 | percent}}</h6>
+                    <ng-template #discountMessage>
+                        <h6 class="one-line-text" id="restaurantDiscountMessage">No discounts available</h6>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
