@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ExploreComponent } from './explore/explore.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ExploreComponent } from './explore/explore.component';
     PageNotFoundComponent,
     CartComponent,
     CheckoutComponent,
-    ExploreComponent
+    ExploreComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
