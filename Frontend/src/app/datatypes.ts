@@ -33,7 +33,9 @@ export interface restaurant{
     image: string,
     rating: number,
     noOfRatings: number,
-    menu: foodItem[]
+    menu: foodItem[],
+    maxDiscount: number,
+    category: string
 }
 
 export interface user{
