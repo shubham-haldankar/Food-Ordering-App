@@ -1,1 +1,60 @@
-<p>menu-bar works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <div class="container-fluid py-1">
+        <a class="navbar-brand" routerLink="/"><i class="fa-solid fa-bowl-rice fa-2xl mx-2" style="color: #ffffff;"></i><em class="h4">Food Ordering App</em></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav col-lg-4 mx-3 mx-lg-4 my-4 my-lg-0">
+                <li>
+                    <form>
+                        <div class="input-group">
+                            <input #searchInput class="form-control" type="search" (keyup)="suggestions($event)" (focusout)="hideSearch()" placeholder="Search Restaurants and Food" aria-label="Search">
+                            <button class="btn btn-success my-0" type="submit" (click)="submitSearch(searchInput.value)"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
+                        </div>
+                        <div class="input-group">
+                            <div class="suggested-result col-md-4 mt-2 shadow" *ngIf="searchResult">
+                                <ul>
+                                    <li *ngFor="let item of searchResult" (mousedown)="explorePage(item.id)">{{item.name | titlecase}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+      
+            <div class="d-lg-flex ms-lg-auto mx-2">
+                <a class="nav-link nav-font text-white me-lg-3 my-4 my-lg-auto" routerLink="/restaurants">
+                    <i class="fa-solid fa-shop fa-lg mx-2" style="color: #ffffff;"></i>bussiness
+                </a>
+    
+                <button type="button" class="position-relative nav-link nav-font text-white mx-lg-3 my-4 my-lg-auto" id="viewCart" data-bs-toggle="modal" data-bs-target="#viewCartModal">
+                    <i class="fa-solid fa-shopping-cart fa-lg mx-2" style="color: #ffffff;"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">9</span>cart
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="viewCartModal" tabindex="-1" aria-labelledby="viewCartModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="viewCartModalLabel">Your Cart</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" (click)="checkout()" data-bs-dismiss="modal">Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <a class="nav-link nav-font text-white ms-lg-3 my-4 my-lg-auto" routerLink="/profile">
+                    <i class="fa-solid fa-circle-user fa-lg mx-2" style="color: #ffffff;"></i>profile
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
