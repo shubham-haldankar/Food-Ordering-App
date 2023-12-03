@@ -4,16 +4,48 @@ export interface foodItem{
     price: number,
     rating: number,
     discount: number,
-    category: string,
     image: string
 }
 
 export interface cartItem{
+    "item-id": number,
     name: string,
     price: number,
     rating: number,
     discount: number,
     image: string,
+    "restaurant-id": number,
     quantity: number,
-    grandTotal: number
+    subTotal: number
+}
+
+export interface restaurant{
+    id: number,
+    name: string,
+    mobile: number,
+    address: {
+        street: string,
+        pincode: number,
+        city: string,
+        state: string,
+        country: string
+    },
+    image: string,
+    rating: number,
+    noOfRatings: number,
+    menu: foodItem[]
+}
+
+export interface user{
+    id: number,
+    name: string,
+    mobile: number,
+    address: {
+        street: string,
+        pincode: number,
+        city: string,
+        state: string,
+        country: string
+    },
+    cart: cartItem[]
 }
