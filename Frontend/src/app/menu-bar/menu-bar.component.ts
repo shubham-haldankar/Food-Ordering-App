@@ -9,7 +9,7 @@ import { RestaurantService } from '../services/restaurant.service';
   styleUrls: ['./menu-bar.component.css']
 })
 export class MenuBarComponent {
-  searchResult: restaurant[] | undefined;
+  searchResult: restaurant[]= [];
 
   constructor(private router:Router, private restaurantService:RestaurantService) {}
 
@@ -28,7 +28,7 @@ export class MenuBarComponent {
   }
 
   hideSearch(){
-    this.searchResult= undefined;
+    this.searchResult= [];
   }
 
   submitSearch(searchInput:string){

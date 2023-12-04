@@ -14,7 +14,7 @@
                             <button class="btn btn-success my-0" type="submit" (click)="submitSearch(searchInput.value)"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
                         </div>
                         <div class="input-group">
-                            <div class="suggested-result col-md-4 mt-2 shadow" *ngIf="searchResult">
+                            <div class="suggested-result col-md-4 mt-2 shadow" *ngIf="searchResult.length">
                                 <ul>
                                     <li *ngFor="let restaurant of searchResult" (mousedown)="explorePage(restaurant.id)">{{restaurant.name | titlecase}}</li>
                                 </ul>
