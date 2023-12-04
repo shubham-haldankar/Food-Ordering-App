@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
-  searchResult: restaurant[] | undefined;
+  searchResult: restaurant[]= [];
   query:string= ''
 
   constructor(private restaurantService: RestaurantService, private activatedRoute:ActivatedRoute) { }
