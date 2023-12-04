@@ -1,1 +1,64 @@
-<p>cart works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-3 text-center borderBottom">
+            <h6 class="py-2">Item</h6>
+        </div>
+        <div class="col-4 text-center borderBottom">
+            <h6 class="py-2">Quantity</h6>
+        </div>
+        <div class="col-3 text-center borderBottom">
+            <h6 class="py-2">Price</h6>
+        </div>
+        <div class="col-2 text-center borderBottom">
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 text-center borderBottom">
+            <h6 class="py-4" *ngFor="let item of cartArray">
+                {{item.name}}
+            </h6>
+        </div>
+        <div class="col-4 text-center borderBottom">
+            <h6 class="py-3" *ngFor="let item of cartArray; index as i">
+                <form class="form-inline">
+                    <div class="input-group">
+                        <button class="btn btn-danger" (click)="decrement(i)"><i class="fa-solid fa-minus fa-sm" style="color: #ffffff;"></i></button>
+                        <input class="form-control text-center" type="number" id="item_{{i}}" (keyup)="onKey($event)" [(ngModel)]="item.quantity" name="quantity">
+                        <button class="btn btn-success" (click)="increment(i)"><i class="fa-solid fa-plus fa-sm" style="color: #ffffff;"></i></button>
+                    </div>
+                </form>
+            </h6>
+        </div>
+        <div class="col-3 text-center borderBottom">
+            <h6 class="py-4" *ngFor="let item of cartArray">
+                {{item.subTotal | currency: "INR" : "symbol" : "1.0-0"}}
+            </h6>
+        </div>
+        <div class="col-2 text-center borderBottom">
+            <h6 class="py-3" *ngFor="let item of cartArray">
+                <button type="button" class="btn" (click)="deleting(item)"><i class="fa-solid fa-trash-can" style="color: #dc3545;"></i></button>
+            </h6>
+        </div>
+    </div>
+    <div class="row pt-4 pb-3 borderBottom">
+        <div class="col-3 text-center">
+            <br>
+        </div>
+        <div class="col-4 text-center">
+            <h6>Total</h6>
+        </div>
+        <div class="col-3 text-center">
+            <h6>{{total | currency: "INR" : "symbol" : "1.0-0"}}</h6>
+        </div>
+        <div class="col-2 text-center">
+            <br>
+        </div>
+    </div>
+
+    <div class="row py-3">
+        <div class="col-12 text-success text-center">
+            You will <b>saved {{cartDiscount | currency: "INR" : "symbol" : "1.0-0"}}</b> on this order!
+        </div>
+    </div>
+</div>
