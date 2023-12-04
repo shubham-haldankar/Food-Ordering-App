@@ -42,7 +42,10 @@
                                 <h5 class="modal-title" id="viewCartModalLabel">Your Cart</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            
+                            <div class="modal-body">
+                                <h5 class="text-center borderBottom pb-3">Cart Details</h5>
+                                <app-cart></app-cart>
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-primary" (click)="checkout()" data-bs-dismiss="modal">Checkout</button>

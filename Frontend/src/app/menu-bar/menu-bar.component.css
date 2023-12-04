@@ -33,3 +33,7 @@
 .d-lg-flex a{
     width: fit-content;
 }
+
+.borderBottom{
+    border-bottom: 1px solid #dee2e6;
+}
