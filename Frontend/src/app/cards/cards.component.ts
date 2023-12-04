@@ -9,6 +9,6 @@ import { restaurant } from '../datatypes';
 export class CardsComponent {
 
   @Input()
-  restaurants:restaurant[] | undefined;
+  restaurants:restaurant[]= [];
 
 }
