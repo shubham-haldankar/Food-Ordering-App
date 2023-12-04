@@ -9,7 +9,7 @@ import { restaurant } from '../datatypes';
 })
 export class HomeComponent implements OnInit {
 
-  restaurants: restaurant[] | undefined;
+  restaurants: restaurant[]= [];
 
   constructor(private restaurantService:RestaurantService) {}
 
