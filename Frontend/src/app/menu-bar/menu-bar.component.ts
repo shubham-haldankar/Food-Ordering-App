@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { cartItem, restaurant } from '../datatypes';
 import { RestaurantService } from '../services/restaurant.service';
@@ -55,5 +55,8 @@ export class MenuBarComponent implements OnInit {
   homePage(){
     this.router.navigate(['/'])
   }
+
+  @Input()
+  key:string= ''
 
 }

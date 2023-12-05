@@ -6,7 +6,7 @@
         </button>
     
         <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav col-lg-4 mx-3 mx-lg-4 my-4 my-lg-0">
+            <ul class="navbar-nav col-lg-4 mx-3 mx-lg-4 my-4 my-lg-0" *ngIf="key!='restaurants'">
                 <li>
                     <form>
                         <div class="input-group">
@@ -29,13 +29,13 @@
                     <i class="fa-solid fa-shop fa-lg mx-2" style="color: #ffffff;"></i>bussiness
                 </a>
     
-                <button type="button" class="position-relative nav-link nav-font text-white mx-lg-3 my-4 my-lg-auto" id="viewCart" data-bs-toggle="modal" data-bs-target="#viewCartModal">
+                <button type="button" class="position-relative nav-link nav-font text-white mx-lg-3 my-4 my-lg-auto" id="viewCart" data-bs-toggle="modal" data-bs-target="#viewCartModal" *ngIf="key!='restaurants' && key!='checkout'">
                     <i class="fa-solid fa-shopping-cart fa-lg mx-2" style="color: #ffffff;"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{cartArray.length}}</span>cart
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="viewCartModal" tabindex="-1" aria-labelledby="viewCartModalLabel" aria-hidden="true">
+                <div class="modal fade" id="viewCartModal" tabindex="-1" aria-labelledby="viewCartModalLabel" aria-hidden="true" *ngIf="key!='restaurants' && key!='checkout'">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -64,8 +64,8 @@
                     </div>
                 </div>
     
-                <a class="nav-link nav-font text-white ms-lg-3 my-4 my-lg-auto" routerLink="/profile">
-                    <i class="fa-solid fa-circle-user fa-lg mx-2" style="color: #ffffff;"></i>profile
+                <a class="nav-link nav-font text-white ms-lg-3 my-4 my-lg-auto" [routerLink]="key=='restaurants'? key+'/profile': '/profile'">
+                    <i class="fa-solid fa-circle-user fa-lg mx-2" style="color: #ffffff;"></i><span *ngIf="key=='restaurants'">restauntant-</span>profile
                 </a>
             </div>
         </div>
