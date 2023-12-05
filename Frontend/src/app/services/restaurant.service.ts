@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { credentials, restaurant } from '../datatypes';
+import { credentials, foodItem, restaurant } from '../datatypes';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -30,7 +30,7 @@ export class RestaurantService {
 
   async verify(email:string, password:string):Promise<number|null>{
     console.log(email, password)
-    let restaurant= await this.http.get<credentials[]>(this.rCUrl+`?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`).toPromise()//change the type
+    let restaurant= await this.http.get<credentials[]>(this.rCUrl+`?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`).toPromise()
     if(restaurant==undefined){
       restaurant= []
     }
@@ -55,8 +55,27 @@ export class RestaurantService {
     }else{
       console.log('reg stared')
       let detailsData= await this.addRestaurantDetails().toPromise()
-      data= {id: detailsData?.id? detailsData.id: 0,email: data.email, password: data.password}
+      data= {id: detailsData!.id, email: data.email, password: data.password}
       return this.http.post<credentials>(this.rCUrl,data).toPromise()
     }
+  }
+
+  async getMenu(email:string):Promise<foodItem[]|undefined>{
+    let restaurant= await this.http.get<credentials[]>(this.rCUrl+`?email=${encodeURIComponent(email)}`).toPromise()
+    let restaurantDetails= await this.http.get<restaurant>(this.rUrl+`/${restaurant![0].id}`).toPromise()
+    return restaurantDetails?.menu
+  }
+
+  updateDetails(rsId:number,detailsData:restaurant){
+    return this.http.put<restaurant>(this.rUrl+"/"+rsId,detailsData)
+  }
+
+  async getRating(rsId:number):Promise<number>{
+    let restaurantDetails= await this.http.get<restaurant>(this.rUrl+`/${rsId}`).toPromise()
+    return restaurantDetails!.rating
+  }
+
+  updatePassword(credentials:credentials){
+    return this.http.put<credentials>(this.rCUrl+'/'+credentials.id,credentials)
   }
 }
