@@ -14,9 +14,11 @@ export class HomeComponent implements OnInit {
   constructor(private restaurantService:RestaurantService) {}
 
   ngOnInit(): void {
-    this.restaurantService.getRestaurants().subscribe(restaurants=>{
-      this.restaurants=restaurants
-    })
+    this.restaurantService.getRestaurantsDetails().subscribe(
+      restaurants=>{
+        this.restaurants=restaurants
+      }
+    )
   }
 
 }
