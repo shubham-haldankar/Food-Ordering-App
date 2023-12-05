@@ -1,17 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { restaurant } from '../datatypes';
+import { cartItem, restaurant } from '../datatypes';
 import { RestaurantService } from '../services/restaurant.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-menu-bar',
   templateUrl: './menu-bar.component.html',
   styleUrls: ['./menu-bar.component.css']
 })
-export class MenuBarComponent {
+export class MenuBarComponent implements OnInit {
   searchResult: restaurant[]= [];
+  cartArray: cartItem[]= []
 
-  constructor(private router:Router, private restaurantService:RestaurantService) {}
+  constructor(private router:Router, private restaurantService:RestaurantService, private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.cartService.cart$.subscribe(data=>data?this.cartArray=data:this.cartArray=[])
+  }
 
   suggestions(query:KeyboardEvent){
     if(query){
@@ -42,7 +48,12 @@ export class MenuBarComponent {
   }
 
   checkout(){
+    this.cartService.cart$.value.forEach((item)=>this.cartService.updateCart(item))
     this.router.navigate(['/checkout'])
+  }
+
+  homePage(){
+    this.router.navigate(['/'])
   }
 
 }
