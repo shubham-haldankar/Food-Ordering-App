@@ -51,3 +51,9 @@ export interface user{
     },
     cart: cartItem[]
 }
+
+export interface credentials{
+    id: number,
+    email: string,
+    password: string
+}
