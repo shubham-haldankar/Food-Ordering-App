@@ -66,4 +66,12 @@ export class UserService {
     return this.http.put<credentials>(this.uCUrl+'/'+credentials.id,credentials)
   }
 
+  async postCart(email: string, cart:cartItem[]){
+    let user= await this.http.get<credentials[]>(this.uCUrl+`?email=${encodeURIComponent(email)}`).toPromise()
+    let userDetails= await this.http.get<user>(this.uUrl+`/${user![0].id}`).toPromise()
+    userDetails!.cart= cart
+    console.log('updatecart inside 123',this.uUrl+`/${user![0].id}`,userDetails)
+    return this.http.put<user>(this.uUrl+`/${user![0].id}`, userDetails).toPromise()
+  }
+
 }
