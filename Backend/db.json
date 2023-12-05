@@ -123,7 +123,7 @@
             "name": "Strawberry Ice Cream",
             "price": 70,
             "rating": 3.7,
-            "category": "Sweet",
+            "category": "Ice Cream",
             "discount": 10,
             "image": "strawberry-ice-cream.jpg",
             "restaurant-id": 2,
