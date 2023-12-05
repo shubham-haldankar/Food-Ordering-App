@@ -13,6 +13,7 @@ export interface cartItem{
     name: string,
     price: number,
     rating: number,
+    category: string,
     discount: number,
     image: string,
     "restaurant-id": number,
