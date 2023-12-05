@@ -84,7 +84,7 @@ export class ExploreComponent implements OnInit {
     if(this.selectedItem){
       let item: any;
       let st= this.discountedPrice*this.selectedQuantity;
-      item= {...this.selectedItem, rsId: this.rsId, quantity: this.selectedQuantity, subTotal: st}
+      item= {...this.selectedItem, "restaurant-id": this.rsId, quantity: this.selectedQuantity, subTotal: st}
       this.cartService.updateCart(item)
     }
   }
