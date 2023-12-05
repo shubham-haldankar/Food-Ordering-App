@@ -1,1 +1,53 @@
-<p>sign-up works!</p>
+<div class="container">
+    <div class="row justify-content-center card-margin-top" style="margin-bottom: 10vh;">
+        <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                <div class="card shadow-lg">
+                    <div class="card-header">
+                        <h2 class="text-center my-2">For {{(parentUrl?parentUrl:'Users') | titlecase}}</h2>
+                    </div>
+                    <div class="card-body p-5 pt-4">
+                        <h1 class="fs-4 card-title fw-bold align-center">
+                            <button type="button" class="btn btn-lg btn-outline-primary btn-half rounded-left-only" (click)="loginPage()">Login</button>
+                            <button type="button" class="btn btn-lg btn-primary active btn-half rounded-right-only">Sign up</button>
+                        </h1>
+                        <form #signUpForm="ngForm" class="form-margin-top" (ngSubmit)="signUpForm.valid && pwd.value==cnfpwd.value? submitForm(signUpForm): undefined">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="emailId" [(ngModel)]="email" name="email" placeholder="Email" #emailId="ngModel" required autofocus/>
+                                <label for="emailId">Email</label>
+                                <div [ngStyle]="{visibility: ((emailId.invalid && emailId.dirty) || (signUpForm.submitted && signUpForm.controls['email'].errors))  ? 'visible': 'hidden'}" class="text-danger text-center mt-1">
+                                    <span *ngIf="!((signUpForm.controls['email']?.errors||{})!['pattern']); else emailError">Email is required</span>
+                                    <ng-template #emailError class="text-danger text-center mt-1">Enter valid Email</ng-template>
+                                </div>
+                                
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="pwd" [(ngModel)]="password" name="password" placeholder="Password" #pwd="ngModel" pattern="^(?=.*\w)(?=.*\W)(?!.* ).{8,16}$" required/>
+                                <label for="pwd">Password</label>
+                                <div [ngStyle]="{visibility: ((pwd.invalid && pwd.dirty) || (signUpForm.submitted && signUpForm.controls['password'].errors))  ? 'visible': 'hidden'}" class="text-danger text-center mt-1">
+                                    <span *ngIf="!((signUpForm.controls['password']?.errors||{})!['pattern']); else passwordError">Password is required</span>
+                                    <ng-template #passwordError class="text-danger text-center mt-1">Password must have 8 to 16 characters with one special character and no space</ng-template>
+                                </div>
+                                
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="cnfpwd" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm Password" #cnfpwd="ngModel" required/>
+                                <label for="cnfpwd">Confirm Password</label>
+                                <div *ngIf="signUpForm.submitted && pwd.valid && cnfpwd.valid && pwd.value!=cnfpwd.value; else requiredMessage" class="text-danger text-center mt-1">"Confirm Password" is not matching with "Password"</div>
+                                <ng-template #requiredMessage>
+                                    <div [ngStyle]="{visibility: ((cnfpwd.invalid && cnfpwd.dirty) || (signUpForm.submitted && signUpForm.controls['confirmPassword'].errors)) ? 'visible' : 'hidden'}" class="text-danger text-center mt-1">Confirm Password is required</div>
+                                </ng-template>
+                            </div>
+                            <div class="form-floating text-center my-2">
+                                <button type="submit" class="btn btn-lg btn-outline-success btn-half">Sign up</button>
+                            </div>
+                        </form>
+                        <div class="text-danger text-center fixed-height">
+                            <span *ngIf="errorMessage">Registration Failed!<br></span>
+                            {{errorMessage}}
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>
