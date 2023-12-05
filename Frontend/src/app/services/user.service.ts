@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private usersUrl: string= "http://localhost:3000/users"
+  private uUrl: string= "http://localhost:3000/users"
   private uCUrl: string= "http://localhost:3000/userCredentials"
 
   constructor(private http: HttpClient) { }
@@ -17,7 +17,7 @@ export class UserService {
     if(user==undefined){
       user= []
     }
-    let userDetails= await this.http.get<user>(this.usersUrl+`/${user[0].id}`).toPromise()
+    let userDetails= await this.http.get<user>(this.uUrl+`/${user[0].id}`).toPromise()
     return userDetails?.cart
   }
 
@@ -41,7 +41,7 @@ export class UserService {
   }
 
   addUserDetails():Observable<user>{
-    return this.http.post<user>(this.usersUrl,{name: "", mobile: 0, address: "", cart: []})
+    return this.http.post<user>(this.uUrl,{name: "", mobile: 0, address: "", cart: []})
   }
 
   async addUser(data:credentials):Promise<credentials|undefined>{
@@ -49,9 +49,21 @@ export class UserService {
       return new Promise((resolve, reject)=>reject('Email already registered'))
     }else{
       let detailsData= await this.addUserDetails().toPromise()
-      data= {id: detailsData?.id?detailsData.id: 0, email:data.email, password:data.password}
+      data= {id: detailsData!.id, email:data.email, password:data.password}
       return this.http.post<credentials>(this.uCUrl,data).toPromise()
     }
+  }
+  
+  getUserDetails(uId:number):Observable<user>{
+    return this.http.get<user>(this.uUrl+"/"+uId)
+  }
+
+  updateDetails(uId:number,detailsData:user){
+    return this.http.put<user>(this.uUrl+"/"+uId,detailsData)
+  }
+
+  updatePassword(credentials:credentials){
+    return this.http.put<credentials>(this.uCUrl+'/'+credentials.id,credentials)
   }
 
 }
