@@ -44,7 +44,7 @@ export class LoginComponent {
         //database synchronization- immediately after login
         let cart= localStorage.getItem('cart')
         this.userService.getCart(String(em)).then(
-          (data:cartItem[])=>{
+          (data:cartItem[]|undefined)=>{
             if(data){
               let cartFiltered= data
               this.cartService.cart$.next(cartFiltered)
