@@ -1,0 +1,27 @@
+.btn-full{
+    width: 100%;
+}
+
+.btn-half{
+    width: 50%;
+}
+
+.rounded-left-only{
+    border-radius: var(--bs-border-radius) 0 0 var(--bs-border-radius);
+}
+
+.rounded-right-only{
+    border-radius: 0 var(--bs-border-radius) var(--bs-border-radius) 0;
+}
+
+.card-margin-top{
+    margin-top: 5vh;
+}
+
+.form-margin-top{
+    margin-top: 2.25rem;
+}
+
+.fixed-height{
+    height: 1rem;
+}
