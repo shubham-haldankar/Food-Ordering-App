@@ -17,6 +17,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'sign-up', component: SignUpComponent },
+  { path: 'restaurants/sign-up', component: SignUpComponent },
+  { path: 'restaurants/login', component: LoginComponent },
   { path: 'restaurants', loadChildren: () => import('./restaurants/restaurants.module').then(m => m.RestaurantsModule) },
   { path : '**', component: PageNotFoundComponent }
 ];
