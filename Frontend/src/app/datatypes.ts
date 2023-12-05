@@ -3,6 +3,7 @@ export interface foodItem{
     name: string,
     price: number,
     rating: number,
+    category: string,
     discount: number,
     image: string
 }
