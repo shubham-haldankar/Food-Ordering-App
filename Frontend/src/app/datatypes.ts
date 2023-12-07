@@ -60,8 +60,7 @@ export interface credentials{
     password: string
 }
 
-export interface order{
-    id: number,
+export interface addOrder{
     "user-id": number,
     "restaurant-id": number,
     items: cartItem[],
@@ -74,4 +73,8 @@ export interface order{
     },
     grandTotal: number,
     rating: number
+}
+
+export interface order extends addOrder{
+    id: number
 }
