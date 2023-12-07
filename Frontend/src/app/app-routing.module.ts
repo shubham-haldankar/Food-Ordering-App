@@ -12,12 +12,14 @@ import { userAuthGuard } from './guards/user-auth.guard';
 import { userLoginPageGuard } from './guards/user-login-page.guard';
 import { restaurantAuthGuard } from './guards/restaurant-auth.guard';
 import { restaurantLoginPageGuard } from './guards/restaurant-login-page.guard';
+import { SuccessComponent } from './success/success.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'search/:query', component: SearchComponent },
   { path: 'explore/:rId', component: ExploreComponent },
   { path: 'checkout', component: CheckoutComponent, canActivate: [userAuthGuard] },
+  { path: 'success/:oId', component: SuccessComponent},
   { path: 'login', component: LoginComponent, canActivate: [userLoginPageGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [userAuthGuard] },
   { path: 'sign-up', component: SignUpComponent, canActivate: [userLoginPageGuard] },

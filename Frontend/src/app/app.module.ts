@@ -14,6 +14,7 @@ import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import { SuccessComponent } from './success/success.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SharedModule } from './shared/shared.module';
     CartComponent,
     CheckoutComponent,
     ExploreComponent,
-    SearchComponent
+    SearchComponent,
+    SuccessComponent
   ],
   imports: [
     BrowserModule,
