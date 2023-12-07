@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { CartService } from '../services/cart.service';
 import { cartItem, user } from '../datatypes';
+import { OrderService } from '../services/order.service';
 
 @Component({
   selector: 'app-checkout',
@@ -21,7 +22,7 @@ export class CheckoutComponent implements OnInit{
   gt: number= 0
   orderId: number= 0
 
-  constructor(private fb:FormBuilder, private router: Router, private user: UserService, private cartService: CartService) {}
+  constructor(private fb:FormBuilder, private router: Router, private user: UserService, private cartService: CartService, private orderService:OrderService) {}
   
   ngOnInit(): void {
     let em= localStorage.getItem('email')
@@ -55,7 +56,10 @@ export class CheckoutComponent implements OnInit{
   }
 
   placeOrder(){
-
+    this.orderService.addOrder({'user-id': this.idData,'restaurant-id': this.cartService.cart$.value[0]['restaurant-id'], items: this.cartService.cart$.value, address: this.detailsForm.value.address, grandTotal: this.gt, rating: 0}).subscribe(
+      data=>{
+        this.cartService.resetCart()
+        this.router.navigate(['/success/',data.id])})
   }
 
   homePage(){
