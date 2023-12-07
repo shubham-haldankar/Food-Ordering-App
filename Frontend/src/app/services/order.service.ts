@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { order } from '../datatypes';
+import { addOrder, order } from '../datatypes';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class OrderService {
 
   constructor(private http:HttpClient) { }
 
-  addOrder(data:order){
+  addOrder(data:addOrder){
     return this.http.post<order>(this.oUrl, data)
   }
 }
