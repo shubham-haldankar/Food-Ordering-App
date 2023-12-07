@@ -79,4 +79,19 @@ export class CartService {
         }
       })
   }
+
+  resetCart(){
+    let em= localStorage.getItem('email')
+    let pwd= localStorage.getItem('password')
+    console.log(em,pwd)
+    this.userAuthService.login(String(em),String(pwd)).then(
+      (verified)=>{
+        if(verified){
+          this.cart$.next([])
+          this.total$.next(0)
+          this.netDiscount$.next(0)
+          this.userService.postCart(String(em), []).then((data)=>console.log('resetCart called',data))
+        }
+      })
+  }
 }
