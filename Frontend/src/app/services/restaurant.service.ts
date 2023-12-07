@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { credentials, foodItem, restaurant } from '../datatypes';
+import { credentials, foodItem, order, restaurant } from '../datatypes';
 import { Observable } from 'rxjs';
+import { OrderService } from './order.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class RestaurantService {
   private rUrl: string= "http://localhost:3000/restaurants"
   private rCUrl: string= "http://localhost:3000/restaurantCredentials"
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private orderService:OrderService) { }
 
   getRestaurants():Observable<credentials[]>{
     return this.http.get<credentials[]>(this.rCUrl)
@@ -77,5 +78,17 @@ export class RestaurantService {
 
   updatePassword(credentials:credentials){
     return this.http.put<credentials>(this.rCUrl+'/'+credentials.id,credentials)
+  }
+
+  async updateRating(orderId:number, r:number){
+    this.orderService.addRating(orderId,r)
+    let orderData= await this.orderService.getOrder(orderId).toPromise()
+    let rsId= orderData!['restaurant-id']
+    let restaurantData= await this.getRestaurantDetails(rsId).toPromise()
+    let orders= await this.orderService.getOrders().toPromise()
+    let ratings= orders!.filter((order:order)=>order['restaurant-id']==rsId && order.rating>0).map((order:order)=>order.rating)
+    restaurantData!.rating= Math.round(ratings.reduce((partialSum:number, a:number) => partialSum + a, 0)/ratings.length*10)/10
+    restaurantData!.noOfRatings= ratings.length
+    return await this.http.put<any>(this.rUrl+`/${rsId}`,restaurantData).toPromise()
   }
 }
