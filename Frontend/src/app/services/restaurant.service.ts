@@ -91,4 +91,9 @@ export class RestaurantService {
     restaurantData!.noOfRatings= ratings.length
     return await this.http.put<any>(this.rUrl+`/${rsId}`,restaurantData).toPromise()
   }
+
+  async getId(em:string){
+    let rc= await this.http.get<any>(this.rCUrl+`/?email=${em}`).toPromise()
+    return rc[0].id
+  }
 }
