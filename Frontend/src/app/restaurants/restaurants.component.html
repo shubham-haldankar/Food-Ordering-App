@@ -1,1 +1,228 @@
-<p>restaurants works!</p>
+<h2 class="text-center menuHeading">Hi {{restaurantName | titlecase}},</h2>
+<h2 class="text-center menuHeading mb-4">Add Food Items to your Menu</h2>
+
+<div class="row" *ngIf="foodArray?.length">
+    <div class="col-sm-6 col-lg-4 col-xl-3 px-3 mb-5" id="foodCard" *ngFor="let food of foodArray; index as i">
+        <div class="card shadow card-width mx-auto">
+            <img class="card-img-top" id="foodImage" src="assets/{{food.image}}" alt="{{food.name}}" height="200px">
+            <div class="card-body text text-center">
+                <h5 class="card-title py-2" id="foodName" style="color: white; background-color: black;">{{food.name | titlecase}}</h5>
+                <div class="borderBottom px-3 py-1">
+                    <h6 class="one-line-text" id="foodPrice">Price: {{food.price | currency: "INR" : "symbol" : "1.0-0"}}</h6>
+                    <h6 class="one-line-text" id="foodRating">Rating: {{food.rating}}<i class="fa-solid fa-star fa-xs" style="color: #fcc2a2;"></i></h6>
+                    <h6 class="one-line-text" id="foodDiscount">Discount: {{food.discount/100 | percent}}</h6>
+                </div>
+                <button class="btn btn-success m-2 px-4" id="editItem" data-bs-toggle="modal" data-bs-target="#updateItemModal" (click)="selectingItem(food,i)">Edit <i class="fa-solid fa-edit fa-sm" style="color: #ffffff;"></i></button>
+                <button class="btn btn-danger m-2 px-4" id="deleteItem" data-bs-toggle="modal" data-bs-target="#deleteItemModal" (click)="selectingItem(food,i)">Delete <i class="fa-solid fa-trash-can fa-sm" style="color: #ffffff;"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="deleteItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: fit-content;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title px-4" id="deleteItemModalLabel">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteItem()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="updateItemModal" tabindex="-1" aria-labelledby="updateItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" *ngIf="selectedItem">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateItemModalLabel">{{selectedItem.name}} <sup>{{selectedItem.rating}}<i class="fa-solid fa-star fa-xs" style="color: #fcc2a2;"></i></sup></h5>
+                    <br>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="editItemForm" class="form-margin-top">
+                        <div class="d-flex justify-content-around">
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="text" class="form-control" id="name" formControlName="name"/>
+                                <label for="name">Name</label>
+                                <div id="nameError" class="text-danger text-center error-height mt-1">
+                                <div *ngIf="editItemForm.controls['name'].dirty && editItemForm.controls['name'].invalid">
+                                    <span *ngIf="editItemForm.controls['name'].errors!['required']">Name is required</span>
+                                    <span *ngIf="editItemForm.controls['name'].errors!['pattern']">Enter valid Name</span>
+                                </div>
+                                </div>
+                            </div>
+                    
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="number" class="form-control" id="price" formControlName="price"/>
+                                <label for="price">Price</label>
+                                <div id="priceError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="editItemForm.controls['price'].dirty && editItemForm.controls['price'].invalid">
+                                        <span *ngIf="editItemForm.controls['price'].errors!['required']">Price is required</span>
+                                        <span *ngIf="editItemForm.controls['price'].errors!['min'] || editItemForm.controls['price'].errors!['max']">Price must be less than {{1000 | currency: "INR" : "symbol" : "1.0-0"}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="number" class="form-control" id="rating" formControlName="rating"/>
+                                <label for="rating">Rating</label>
+                                <div id="ratingError" class="text-danger text-center error-height mt-1">
+                                <div *ngIf="editItemForm.controls['rating'].dirty && editItemForm.controls['rating'].invalid">
+                                    <span *ngIf="editItemForm.controls['rating'].errors!['required']">Rating is required</span>
+                                    <span *ngIf="editItemForm.controls['rating'].errors!['min'] || editItemForm.controls['rating'].errors!['max']">Rating must be between 1 to 5</span>
+                                </div>
+                                </div>
+                            </div>
+                    
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="number" class="form-control" id="discount" formControlName="discount"/>
+                                <label for="discount">Discount</label>
+                                <div id="discountError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="editItemForm.controls['discount'].dirty && editItemForm.controls['discount'].invalid">
+                                        <span *ngIf="editItemForm.controls['discount'].errors!['required']">Discount is required</span>
+                                        <span *ngIf="editItemForm.controls['discount'].errors!['min'] || editItemForm.controls['discount'].errors!['max']">Discount must be between 0% to 99%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="text" class="form-control" id="category" formControlName="category"/>
+                                <label for="category">Category</label>
+                                <div id="categoryError" class="text-danger text-center error-height mt-1">
+                                <div *ngIf="editItemForm.controls['category'].dirty && editItemForm.controls['category'].invalid">
+                                    <span *ngIf="editItemForm.controls['category'].errors!['required']">Category is required</span>
+                                    <span *ngIf="editItemForm.controls['category'].errors!['pattern']">Enter valid Category</span>
+                                </div>
+                                </div>
+                            </div>
+                    
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="url" class="form-control" id="image" formControlName="image"/>
+                                <label for="image">Image</label>
+                                <div id="imageError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="editItemForm.controls['image'].dirty && editItemForm.controls['image'].invalid">
+                                        <span *ngIf="editItemForm.controls['image'].errors!['required']">Image is required</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!(editItemForm.valid)" (click)="editItem()">Update Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-6 col-lg-4 col-xl-3 px-3 mb-5" id="foodAddCard">
+        <div class="card shadow card-width card-height mx-auto"><!--height of add card is not responsive 200px+13.5rem--> 
+            <button class="btn btn-secondary px-4" style="height: 100%" id="addItem" data-bs-toggle="modal" data-bs-target="#addItemModal"><br><i class="fa-solid fa-plus" style="color: #ffffff;font-size: 150px;"></i><h3 class="mt-5">Add</h3></button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addItemModalLabel">Food Item Name <sup>4<i class="fa-solid fa-star fa-xs" style="color: #fcc2a2;"></i></sup></h5>
+                    <br>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="addItemForm" class="form-margin-top"><!--may be the form name needs to be change-->
+                        <div class="d-flex justify-content-around">
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="text" class="form-control" id="addName" formControlName="name"/>
+                                <label for="addName">Name</label>
+                                <div id="addNameError" class="text-danger text-center error-height mt-1">
+                                <div *ngIf="addItemForm.controls['name'].dirty && addItemForm.controls['name'].invalid">
+                                    <span *ngIf="addItemForm.controls['name'].errors!['required']">Name is required</span>
+                                    <span *ngIf="addItemForm.controls['name'].errors!['pattern']">Enter valid Name</span>
+                                </div>
+                                </div>
+                            </div>
+                    
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="number" class="form-control" id="addPrice" formControlName="price"/>
+                                <label for="addPrice">Price</label>
+                                <div id="addPriceError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="addItemForm.controls['price'].dirty && addItemForm.controls['price'].invalid">
+                                        <span *ngIf="addItemForm.controls['price'].errors!['required']">Price is required</span>
+                                        <span *ngIf="addItemForm.controls['price'].errors!['min'] || addItemForm.controls['price'].errors!['max']">Price must be less than {{1000 | currency: "INR" : "symbol" : "1.0-0"}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="number" class="form-control" id="addRating" formControlName="rating"/>
+                                <label for="addRating">Rating</label>
+                                <div id="addRatingError" class="text-danger text-center error-height mt-1">
+                                <div *ngIf="addItemForm.controls['rating'].dirty && addItemForm.controls['rating'].invalid">
+                                    <span *ngIf="addItemForm.controls['rating'].errors!['required']">Rating is required</span>
+                                    <span *ngIf="addItemForm.controls['rating'].errors!['min'] || addItemForm.controls['rating'].errors!['max']">Rating must be between 1 to 5</span>
+                                </div>
+                                </div>
+                            </div>
+                    
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="number" class="form-control" id="addDiscount" formControlName="discount"/>
+                                <label for="addDiscount">Discount</label>
+                                <div id="addDiscountError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="addItemForm.controls['discount'].dirty && addItemForm.controls['discount'].invalid">
+                                        <span *ngIf="addItemForm.controls['discount'].errors!['required']">Discount is required</span>
+                                        <span *ngIf="addItemForm.controls['discount'].errors!['min'] || addItemForm.controls['discount'].errors!['max']">Discount must be between 0% to 99%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="text" class="form-control" id="addCategory" formControlName="category"/>
+                                <label for="addCategory">Category</label>
+                                <div id="addCategoryError" class="text-danger text-center error-height mt-1">
+                                <div *ngIf="addItemForm.controls['category'].dirty && addItemForm.controls['category'].invalid">
+                                    <span *ngIf="addItemForm.controls['category'].errors!['required']">Category is required</span>
+                                    <span *ngIf="addItemForm.controls['category'].errors!['pattern']">Enter valid Category</span>
+                                </div>
+                                </div>
+                            </div>
+                    
+                            <div class="form-floating mb-3 col-md-5">
+                                <input type="url" class="form-control" id="addImage" formControlName="image"/>
+                                <label for="addImage">Image</label>
+                                <div id="addImageError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="addItemForm.controls['image'].dirty && addItemForm.controls['image'].invalid">
+                                        <span *ngIf="addItemForm.controls['image'].errors!['required']">Image is required</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!(addItemForm.valid)" (click)="addItem()">Update Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

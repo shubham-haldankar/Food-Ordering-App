@@ -1,0 +1,78 @@
+.menuHeading{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-shadow: 0.3rem 0.3rem 0.3rem #c1c1c1;
+    margin-top: 0.6rem;
+}
+
+.card{
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.card-img-top{
+    border-radius: 1rem 1rem 0 0;
+}
+
+.card-body{
+    padding: 0;
+}
+
+.borderBottom{
+    border-bottom: 1px solid #dee2e6;
+}
+
+.btn-full{
+    width: 100%;
+}
+
+.btn-half{
+    width: 50%;
+}
+
+.rounded-left-only{
+    border-radius: var(--bs-border-radius) 0 0 var(--bs-border-radius);
+}
+
+.rounded-right-only{
+    border-radius: 0 var(--bs-border-radius) var(--bs-border-radius) 0;
+}
+
+.card-margin{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.form-margin-top{
+    margin-top: 2.25rem;
+}
+
+.fixed-height{
+    height: 1rem;
+}
+
+.error-height{
+    height: 1.5rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.one-line-text{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-height{
+    height: 425.6px;
+}
+
+.card-width{
+    max-width: 300px;
+    min-width: 274px;
+}
