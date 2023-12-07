@@ -8,6 +8,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { LoginComponent } from './shared/login/login.component';
 import { ProfileComponent } from './shared/profile/profile.component';
 import { SignUpComponent } from './shared/sign-up/sign-up.component';
+import { userAuthGuard } from './guards/user-auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,7 @@ const routes: Routes = [
   { path: 'explore/:rId', component: ExploreComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [userAuthGuard] },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'restaurants/sign-up', component: SignUpComponent },
   { path: 'restaurants/login', component: LoginComponent },
