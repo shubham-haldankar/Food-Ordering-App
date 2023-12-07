@@ -10,6 +10,7 @@ import { ProfileComponent } from './shared/profile/profile.component';
 import { SignUpComponent } from './shared/sign-up/sign-up.component';
 import { userAuthGuard } from './guards/user-auth.guard';
 import { userLoginPageGuard } from './guards/user-login-page.guard';
+import { restaurantAuthGuard } from './guards/restaurant-auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent, canActivate: [userLoginPageGuard] },
   { path: 'restaurants/sign-up', component: SignUpComponent },
   { path: 'restaurants/login', component: LoginComponent },
-  { path: 'restaurants', loadChildren: () => import('./restaurants/restaurants.module').then(m => m.RestaurantsModule) },
+  { path: 'restaurants', loadChildren: () => import('./restaurants/restaurants.module').then(m => m.RestaurantsModule), canActivateChild: [restaurantAuthGuard] },
   { path : '**', component: PageNotFoundComponent }
 ];
 
