@@ -1,1 +1,24 @@
-<p>success works!</p>
+<div class="container-fluid">
+    <div class="row justify-content-center text-center" style="margin-top: 15vh;">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <i class="fa fa-check-circle text-success pb-4" style="font-size:72px"></i>
+                    <h1 class="text-success">Order Confirmed!</h1>
+                    <h2 class="mb-4">Your Order ID is {{orderId}}</h2>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn" (click)="submitRating(1)"><i class="fa fa-star star-size" [style.color]="color1"></i></button>
+                        <button type="button" class="btn" (click)="submitRating(2)"><i class="fa fa-star star-size" [style.color]="color2"></i></button>
+                        <button type="button" class="btn" (click)="submitRating(3)"><i class="fa fa-star star-size" [style.color]="color3"></i></button>
+                        <button type="button" class="btn" (click)="submitRating(4)"><i class="fa fa-star star-size" [style.color]="color4"></i></button>
+                        <button type="button" class="btn" (click)="submitRating(5)"><i class="fa fa-star star-size" [style.color]="color5"></i></button>
+                    </div>
+                    <!-- <button type="button" class="btn btn-outline-primary mt-4" (click)="resetRating()">Reset Rating</button> -->
+                </div>
+                <div class="card-footer p-4">
+                    <button type="button" class="btn btn-primary" (click)="homePage()">Continue Exploring</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
