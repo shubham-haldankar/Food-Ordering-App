@@ -11,6 +11,7 @@ import { SignUpComponent } from './shared/sign-up/sign-up.component';
 import { userAuthGuard } from './guards/user-auth.guard';
 import { userLoginPageGuard } from './guards/user-login-page.guard';
 import { restaurantAuthGuard } from './guards/restaurant-auth.guard';
+import { restaurantLoginPageGuard } from './guards/restaurant-login-page.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,8 +21,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [userLoginPageGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [userAuthGuard] },
   { path: 'sign-up', component: SignUpComponent, canActivate: [userLoginPageGuard] },
-  { path: 'restaurants/sign-up', component: SignUpComponent },
-  { path: 'restaurants/login', component: LoginComponent },
+  { path: 'restaurants/sign-up', component: SignUpComponent, canActivate: [restaurantLoginPageGuard] },
+  { path: 'restaurants/login', component: LoginComponent, canActivate: [restaurantLoginPageGuard] },
   { path: 'restaurants', loadChildren: () => import('./restaurants/restaurants.module').then(m => m.RestaurantsModule), canActivateChild: [restaurantAuthGuard] },
   { path : '**', component: PageNotFoundComponent }
 ];
