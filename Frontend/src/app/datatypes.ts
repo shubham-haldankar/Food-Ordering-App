@@ -59,3 +59,19 @@ export interface credentials{
     email: string,
     password: string
 }
+
+export interface order{
+    id: number,
+    "user-id": number,
+    "restaurant-id": number,
+    items: cartItem[],
+    address: {
+        street: string,
+        pincode: number,
+        city: string,
+        state: string,
+        country: string
+    },
+    grandTotal: number,
+    rating: number
+}
