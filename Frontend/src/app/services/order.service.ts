@@ -14,4 +14,18 @@ export class OrderService {
   addOrder(data:addOrder){
     return this.http.post<order>(this.oUrl, data)
   }
+
+  getOrder(orderId:number){
+    return this.http.get<order>(this.oUrl+`/${orderId}`)
+  }
+
+  getOrders(){
+    return this.http.get<order[]>(this.oUrl)
+  }
+
+  async addRating(orderId:number,r:number){
+    let orderDetails= await this.getOrder(orderId).toPromise()
+    orderDetails!.rating= r
+    return await this.http.put<order>(this.oUrl+`/${orderId}`, orderDetails).toPromise()
+  }
 }
