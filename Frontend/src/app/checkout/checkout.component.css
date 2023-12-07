@@ -1,0 +1,29 @@
+.card-margin{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.form-margin-top{
+    margin-top: 2.25rem;
+}
+
+.fixed-height{
+    height: 1rem;
+}
+
+.error-height{
+    height: 1.5rem;
+}
+
+.borderBottom{
+    border-bottom: 1px solid #dee2e6;
+}
+
+.borderBottom{
+    border-top: 1px solid #dee2e6;
+}
+
+.card-width{
+    max-width: 730px;
+    min-width: 520px;
+}

@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'search/:query', component: SearchComponent },
   { path: 'explore/:rId', component: ExploreComponent },
-  { path: 'checkout', component: CheckoutComponent },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [userAuthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [userLoginPageGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [userAuthGuard] },
   { path: 'sign-up', component: SignUpComponent, canActivate: [userLoginPageGuard] },

@@ -1,1 +1,161 @@
-<p>checkout works!</p>
+<div class="row justify-content-center">
+    <div class="col-xl-5 card-margin card-width px-4">
+        <div class="card shadow">
+            <div class="card-header">
+                <h2 class="text-center my-2">Bill Summary</h2>
+            </div>
+            <div class="card-body px-1 py-4" *ngIf="cartArray.length; else message">
+                <app-cart></app-cart>
+
+                <div class="container borderTop">
+                    <div class="row pt-4 pb-3 borderBottom">
+                        <div class="col-1 text-center">
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="col-6 text-end">
+                            <h6>GST and restauntant charges</h6>
+                            <h6>Delivery partner fee</h6>
+                            <h6>Platform fee</h6>
+                        </div>
+                        <div class="col-3 text-center">
+                            <h6>{{st*0.13 | currency: "INR" : "symbol" : "1.0-0"}}</h6>
+                            <h6>{{50 | currency: "INR" : "symbol" : "1.0-0"}}</h6>
+                            <h6>{{3 | currency: "INR" : "symbol" : "1.0-0"}}</h6>
+                        </div>
+                        <div class="col-2 text-center">
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row pt-4 pb-3 borderBottom">
+                        <div class="col-3 text-center">
+                            <br>
+                        </div>
+                        <div class="col-4 text-center">
+                            <h6>Grand Total</h6>
+                        </div>
+                        <div class="col-3 text-center">
+                            <h6>{{gt | currency: "INR" : "symbol" : "1.0-0"}}</h6>
+                        </div>
+                        <div class="col-2 text-center">
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #message>
+                <div class="card-body p-5 py-4">
+                  <h3 class="text-center">Your cart is empty</h3>
+                </div>
+                <div class="card-footer py-4 d-block text-center">
+                    <button type="button" class="btn btn-primary" (click)="homePage()" data-bs-dismiss="modal">Continue Exploring</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    
+    <div class="col-xl-6 card-margin card-width px-4" style="margin-bottom: 10vh;">
+        <div class="card shadow">
+            <div class="card-header">
+                <h2 class="text-center my-2">Delivery Address</h2>
+            </div>
+            <div class="card-body p-5 pt-0">
+                <form [formGroup]="detailsForm" class="form-margin-top" (ngSubmit)="placeOrder()">
+                    <div class="d-flex justify-content-around">
+                        <div class="form-floating mb-3 col-5">
+                            <input type="text" class="form-control" id="name" formControlName="name"/>
+                            <label for="name">Name</label>
+                            <div id="nameError" class="text-danger text-center error-height mt-1">
+                            <div *ngIf="detailsForm.controls['name'].dirty && detailsForm.controls['name'].invalid">
+                                <span *ngIf="detailsForm.controls['name'].errors!['required']">Name is required</span>
+                                <span *ngIf="detailsForm.controls['name'].errors!['pattern']">Enter valid Name</span>
+                            </div>
+                            </div>
+                        </div>
+                
+                        <div class="form-floating mb-3 col-5">
+                            <input type="tel" class="form-control" id="mob" formControlName="mobile"/>
+                            <label for="mob">Mobile Number</label>
+                            <div id="mobError" class="text-danger text-center error-height mt-1">
+                                <div *ngIf="detailsForm.controls['mobile'].dirty && detailsForm.controls['mobile'].invalid">
+                                    <span *ngIf="detailsForm.controls['mobile'].errors!['required']">Mobile Number is required</span>
+                                    <span *ngIf="detailsForm.controls['mobile'].errors!['pattern']">Mobile Number must be 10 digits</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <fieldset formGroupName="address">
+                        <div class="d-flex justify-content-around">
+                            <div class="form-floating mb-3 col-11">
+                                <input type="text" class="form-control" id="street" formControlName="street"/>
+                                <label for="street">Apartment, Street, Area</label>
+                                <div id="streetError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="detailsForm.controls['address'].get('street')!.dirty && detailsForm.controls['address'].get('street')!.invalid">
+                                        <span *ngIf="detailsForm.controls['address'].get('street')!.errors!['required']">House Number, Street, Area is required</span>
+                                        <span *ngIf="detailsForm.controls['address'].get('street')!.errors!['pattern']">Enter valid House Number, Street, Area</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="d-flex justify-content-around">
+                            <div class="form-floating mb-3 col-5">
+                                <input type="number" class="form-control" id="pincode" formControlName="pincode"/>
+                                <label for="pincode">Pincode</label>
+                                <div id="pincodeError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="detailsForm.controls['address'].get('pincode')!.dirty && detailsForm.controls['address'].get('pincode')!.invalid">
+                                        <span *ngIf="detailsForm.controls['address'].get('pincode')!.errors!['required']">Pincode is required</span>
+                                        <span *ngIf="detailsForm.controls['address'].get('pincode')!.errors!['pattern']">Pincode must be of 6 digits</span>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="form-floating mb-3 col-5">
+                                <input type="text" class="form-control" id="city" formControlName="city"/>
+                                <label for="city">City</label>
+                                <div id="cityError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="detailsForm.controls['address'].get('city')!.dirty && detailsForm.controls['address'].get('city')!.invalid">
+                                        <span *ngIf="detailsForm.controls['address'].get('city')!.errors!['required']">City is required</span>
+                                        <span *ngIf="detailsForm.controls['address'].get('city')!.errors!['pattern']">Enter valid City</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="d-flex justify-content-around">
+                            <div class="form-floating mb-3 col-5">
+                                <input type="text" class="form-control" id="state" formControlName="state"/>
+                                <label for="state">State</label>
+                                <div id="stateError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="detailsForm.controls['address'].get('state')!.dirty && detailsForm.controls['address'].get('state')!.invalid">
+                                        <span *ngIf="detailsForm.controls['address'].get('state')!.errors!['required']">State is required</span>
+                                        <span *ngIf="detailsForm.controls['address'].get('state')!.errors!['pattern']">Enter valid State</span>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="form-floating mb-3 col-5">
+                                <input type="text" class="form-control" id="country" formControlName="country"/>
+                                <label for="country">Country</label>
+                                <div id="countryError" class="text-danger text-center error-height mt-1">
+                                    <div *ngIf="detailsForm.controls['address'].get('country')!.dirty && detailsForm.controls['address'].get('country')!.invalid">
+                                        <span *ngIf="detailsForm.controls['address'].get('country')!.errors!['required']">Country is required</span>
+                                        <span *ngIf="detailsForm.controls['address'].get('country')!.errors!['pattern']">Enter valid Country</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-floating text-center my-2">
+                        <button type="submit" class="btn btn-lg btn-outline-success" [disabled]="!(detailsForm.valid && cartArray.length)">Place Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
