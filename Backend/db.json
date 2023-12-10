@@ -1,382 +1,406 @@
 {
-    "userCredentials": [
-      {
-        "id": 1,
-        "email": "abc@gmail.com",
-        "password": "usr1####"
+  "userCredentials": [
+    {
+      "id": 1,
+      "email": "abc@gmail.com",
+      "password": "usr1####"
+    },
+    {
+      "id": 2,
+      "email": "efg@gmail.com",
+      "password": "usr2####"
+    },
+    {
+      "id": 3,
+      "email": "abc3@gmail.com",
+      "password": "usr3****"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "abc efg",
+      "mobile": 1111111111,
+      "address": {
+        "street": "street2",
+        "pincode": 454545,
+        "city": "pune",
+        "state": "maharashtra",
+        "country": "india"
       },
-      {
-        "id": 2,
-        "email": "efg@gmail.com",
-        "password": "usr2####"
-      },
-      {
-        "id": 3,
-        "email": "abc3@gmail.com",
-        "password": "usr3****"
-      }
-    ],
-
-    "users": [
-      {
-        "id": 1,
-        "name": "abc efg",
-        "mobile": 1111111111,
-        "address": {
-            "street": "street2",
-            "pincode": 454545,
-            "city": "pune",
-            "state": "maharashtra",
-            "country": "india"
+      "cart": [
+        {
+          "id": 1,
+          "name": "Gulab Jamun",
+          "price": 180,
+          "rating": 4.2,
+          "category": "Sweet",
+          "discount": 10,
+          "image": "gulab-jamun.jpg",
+          "restaurant-id": 1,
+          "quantity": 1,
+          "subTotal": 162
         },
-        "cart": [
-          {
-            "item-id": 1,
-            "name": "Gulab Jamun",
-            "price": 180,
-            "rating": 4.2,
-            "category": "Sweet",
-            "discount": 10,
-            "image": "gulab-jamun.jpg",
-            "restaurant-id": 1,
-            "quantity": 1,
-            "subTotal": 162
-          }
-        ]
+        {
+          "id": 2,
+          "name": "Rasmalai",
+          "price": 220,
+          "rating": 4,
+          "category": "Sweet",
+          "discount": 15,
+          "image": "rasmalai.jpg",
+          "restaurant-id": 1,
+          "quantity": 1,
+          "subTotal": 187
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "efg mno",
+      "mobile": 9999999999,
+      "address": {
+        "street": "street4",
+        "pincode": 404040,
+        "city": "mumbai",
+        "state": "maharashtra",
+        "country": "india"
       },
-      {
-        "id": 2,
-        "name": "efg mno",
-        "mobile": 9999999999,
-        "address": {
-            "street": "street4",
-            "pincode": 404040,
-            "city": "mumbai",
-            "state": "maharashtra",
-            "country": "india"
-          },
-        "cart": []
+      "cart": []
+    },
+    {
+      "id": 3,
+      "name": "rst uvw",
+      "mobile": 6666666666,
+      "address": {
+        "street": "street9",
+        "pincode": 484848,
+        "city": "nagpur",
+        "state": "maharashtra",
+        "country": "india"
       },
-      {
-        "id": 3,
-        "name": "rst uvw",
-        "mobile": 6666666666,
-        "address": {
-            "street": "street9",
-            "pincode": 484848,
-            "city": "nagpur",
-            "state": "maharashtra",
-            "country": "india"
-          },
-        "cart": []
-      }
-    ],
-
-    "orders": [
-      {
-        "id": 1,
-        "user-id": 1,
-        "restaurant-id": 1,
-        "items": [
-          {
-            "item-id": 2,
-            "name": "Rasmalai",
-            "price": 220,
-            "rating": 4,
-            "category": "Sweet",
-            "discount": 15,
-            "image": "rasmalai.jpg",
-            "restaurant-id": 1,
-            "quantity": 2,
-            "subTotal": 374
-          },
-          {
-            "item-id": 1,
-            "name": "Gulab Jamun",
-            "price": 180,
-            "rating": 4.2,
-            "category": "Sweet",
-            "discount": 10,
-            "image": "gulab-jamun.jpg",
-            "restaurant-id": 1,
-            "quantity": 4,
-            "subTotal": 648
-          }
-        ],
-        "address": {
-            "street": "street2",
-            "pincode": 454545,
-            "city": "pune",
-            "state": "maharashtra",
-            "country": "india"
+      "cart": []
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "user-id": 1,
+      "restaurant-id": 1,
+      "items": [
+        {
+          "item-id": 2,
+          "name": "Rasmalai",
+          "price": 220,
+          "rating": 4,
+          "category": "Sweet",
+          "discount": 15,
+          "image": "rasmalai.jpg",
+          "restaurant-id": 1,
+          "quantity": 2,
+          "subTotal": 374
         },
-        "grandTotal": 1208,
-        "rating": 4
+        {
+          "item-id": 1,
+          "name": "Gulab Jamun",
+          "price": 180,
+          "rating": 4.2,
+          "category": "Sweet",
+          "discount": 10,
+          "image": "gulab-jamun.jpg",
+          "restaurant-id": 1,
+          "quantity": 4,
+          "subTotal": 648
+        }
+      ],
+      "address": {
+        "street": "street2",
+        "pincode": 454545,
+        "city": "pune",
+        "state": "maharashtra",
+        "country": "india"
       },
-      {
-        "id": 2,
-        "user-id": 1,
-        "restaurant-id": 2,
-        "items": [
-          {
-            "item-id": 2,
-            "name": "Strawberry Ice Cream",
-            "price": 70,
-            "rating": 3.7,
-            "category": "Ice Cream",
-            "discount": 10,
-            "image": "strawberry-ice-cream.jpg",
-            "restaurant-id": 2,
-            "quantity": 2,
-            "subTotal": 126
-          }
-        ],
-        "address": {
-            "street": "street2",
-            "pincode": 454545,
-            "city": "pune",
-            "state": "maharashtra",
-            "country": "india"
+      "grandTotal": 1208,
+      "rating": 4
+    },
+    {
+      "id": 2,
+      "user-id": 1,
+      "restaurant-id": 2,
+      "items": [
+        {
+          "item-id": 2,
+          "name": "Strawberry Ice Cream",
+          "price": 70,
+          "rating": 3.7,
+          "category": "Ice Cream",
+          "discount": 10,
+          "image": "strawberry-ice-cream.jpg",
+          "restaurant-id": 2,
+          "quantity": 2,
+          "subTotal": 126
+        }
+      ],
+      "address": {
+        "street": "street2",
+        "pincode": 454545,
+        "city": "pune",
+        "state": "maharashtra",
+        "country": "india"
+      },
+      "grandTotal": 195,
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "user-id": 2,
+      "restaurant-id": 1,
+      "items": [
+        {
+          "item-id": 2,
+          "name": "Jalebi",
+          "price": 90,
+          "rating": 3.9,
+          "category": "Sweet",
+          "discount": 20,
+          "image": "jalebi.jpg",
+          "restaurant-id": 1,
+          "quantity": 3,
+          "subTotal": 216
+        }
+      ],
+      "address": {
+        "street": "street4",
+        "pincode": 404040,
+        "city": "mumbai",
+        "state": "maharashtra",
+        "country": "india"
+      },
+      "grandTotal": 297,
+      "rating": 4
+    }
+  ],
+  "restaurantCredentials": [
+    {
+      "id": 1,
+      "email": "xyz@gmail.com",
+      "password": "rs1#####"
+    },
+    {
+      "id": 2,
+      "email": "pqr@gmail.com",
+      "password": "rs2#####"
+    },
+    {
+      "id": 3,
+      "email": "rst@gmail.com",
+      "password": "rs3#####"
+    },
+    {
+      "id": 4,
+      "email": "kdl@gmail.com",
+      "password": "rs4*****"
+    },
+    {
+      "id": 5,
+      "email": "mno@gmail.com",
+      "password": "rs5*****"
+    },
+    {
+      "id": 6,
+      "email": "wxy@gmail.com",
+      "password": "rs6*****"
+    }
+  ],
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "xyz restaurant",
+      "mobile": 6666666666,
+      "address": {
+        "street": "street5",
+        "pincode": 124578,
+        "city": "pune",
+        "state": "maharashtra",
+        "country": "india"
+      },
+      "image": "xyz-restaurant.jpg",
+      "rating": 4,
+      "noOfRatings": 2,
+      "menu": [
+        {
+          "id": 1,
+          "name": "Gulab Jamun",
+          "price": 180,
+          "rating": 4.2,
+          "category": "Sweet",
+          "discount": 10,
+          "image": "gulab-jamun.jpg"
         },
-        "grandTotal": 195,
-        "rating": 5
-      },
-      {
-        "id": 3,
-        "user-id": 2,
-        "restaurant-id": 1,
-        "items": [
-          {
-            "item-id": 2,
-            "name": "Jalebi",
-            "price": 90,
-            "rating": 3.9,
-            "category": "Sweet",
-            "discount": 20,
-            "image": "jalebi.jpg",
-            "restaurant-id": 1,
-            "quantity": 3,
-            "subTotal": 216
-          }
-        ],
-        "address": {
-            "street": "street4",
-            "pincode": 404040,
-            "city": "mumbai",
-            "state": "maharashtra",
-            "country": "india"
-          },
-        "grandTotal": 297,
-        "rating": 4
-      }
-    ],
-
-    "restaurantCredentials": [
-      {
-        "id": 1,
-        "email": "xyz@gmail.com",
-        "password": "rs1#####"
-      },
-      {
-        "id": 2,
-        "email": "pqr@gmail.com",
-        "password": "rs2#####"
-      },
-      {
-        "id": 3,
-        "email": "rst@gmail.com",
-        "password": "rs3#####"
-      },
-      {
-        "id": 4,
-        "email": "kdl@gmail.com",
-        "password": "rs4*****"
-      },
-      {
-        "id": 5,
-        "email": "mno@gmail.com",
-        "password": "rs5*****"
-      },
-      {
-        "id": 6,
-        "email": "wxy@gmail.com",
-        "password": "rs6*****"
-      }
-    ],
-
-    "restaurants": [
-      {
-        "id": 1,
-        "name": "xyz restaurant",
-        "mobile": 6666666666,
-        "address": {
-          "street": "street5",
-          "pincode": 124578,
-          "city": "pune",
-          "state": "maharashtra",
-          "country": "india"
+        {
+          "id": 2,
+          "name": "Rasmalai",
+          "price": 220,
+          "rating": 4,
+          "category": "Sweet",
+          "discount": 15,
+          "image": "rasmalai.jpg"
         },
-        "image": "",
-        "rating": 4,
-        "noOfRatings": 2,
-        "menu": [
-          {
-            "id": 1,
-            "name": "Gulab Jamun",
-            "price": 180,
-            "rating": 4.2,
-            "category": "Sweet",
-            "discount": 10,
-            "image": "gulab-jamun.jpg"
-          },
-          {
-            "id": 2,
-            "name": "Rasmalai",
-            "price": 220,
-            "rating": 4,
-            "category": "Sweet",
-            "discount": 15,
-            "image": "rasmalai.jpg"
-          },
-          {
-            "id": 3,
-            "name": "Jalebi",
-            "price": 90,
-            "rating": 3.9,
-            "category": "Sweet",
-            "discount": 20,
-            "image": "jalebi.jpg"
-          },
-          {
-            "id": 5,
-            "name": "Kaju Katli",
-            "price": 360,
-            "rating": 4.6,
-            "category": "Sweet",
-            "discount": 15,
-            "image": "kaju-katli.jpg"
-          },
-          {
-            "id": 6,
-            "name": "Motichoor Laddu",
-            "price": 160,
-            "rating": 4.5,
-            "category": "Sweet",
-            "discount": 20,
-            "image": "motichoor-laddu.jpg"
-          }
-        ],
-        "maxDiscount": 20,
-        "category": "Sweet"
-      },
-      {
-        "id": 2,
-        "name": "pqr restaurant",
-        "mobile": 6666669999,
-        "address": {
-            "street": "street3",
-            "pincode": 121212,
-            "city": "mumbai",
-            "state": "maharashtra",
-            "country": "india"
+        {
+          "id": 3,
+          "name": "Jalebi",
+          "price": 90,
+          "rating": 3.9,
+          "category": "Sweet",
+          "discount": 20,
+          "image": "jalebi.jpg"
         },
-        "image": "",
-        "rating": 5,
-        "noOfRatings": 1,
-        "menu": [
-          {
-            "id": 1,
-            "name": "Chocolate Ice Cream",
-            "price": 70,
-            "rating": 4.1,
-            "category": "Ice Cream",
-            "discount": 5,
-            "image": "chocolate-ice-cream.jpg"
-          },
-          {
-            "id": 2,
-            "name": "Strawberry Ice Cream",
-            "price": 70,
-            "rating": 3.7,
-            "category": "Ice Cream",
-            "discount": 10,
-            "image": "strawberry-ice-cream.jpg"
-          }
-        ],
-        "maxDiscount": 10,
-        "category": "Ice Cream"
-      },
-      {
-        "id": 3,
-        "name": "ttt restaurant",
-        "mobile": 9966669999,
-        "address": {
-            "street": "street1",
-            "pincode": 151515,
-            "city": "nagpur",
-            "state": "maharashtra",
-            "country": "india"
+        {
+          "id": 5,
+          "name": "Kaju Katli",
+          "price": 360,
+          "rating": 4.6,
+          "category": "Sweet",
+          "discount": 15,
+          "image": "kaju-katli.jpg"
         },
-        "image": "",
-        "rating": 0,
-        "noOfRatings": 0,
-        "menu": [],
-        "maxDiscount": 0,
-        "category": ""
+        {
+          "id": 6,
+          "name": "Motichoor Laddu",
+          "price": 160,
+          "rating": 4.5,
+          "category": "Sweet",
+          "discount": 20,
+          "image": "motichoor-laddu.jpg"
+        }
+      ],
+      "maxDiscount": 20,
+      "category": "Sweet"
+    },
+    {
+      "id": 2,
+      "name": "pqr restaurant",
+      "mobile": 6666669999,
+      "address": {
+        "street": "street3",
+        "pincode": 121212,
+        "city": "mumbai",
+        "state": "maharashtra",
+        "country": "india"
       },
-      {
-        "id": 4,
-        "name": "rrr restaurant",
-        "mobile": 6666663399,
-        "address": {
-            "street": "street6",
-            "pincode": 161616,
-            "city": "bengaluru",
-            "state": "karnataka",
-            "country": "india"
+      "image": "pqr-restaurant.jpg",
+      "rating": 5,
+      "noOfRatings": 1,
+      "menu": [
+        {
+          "id": 1,
+          "name": "Chocolate Ice Cream",
+          "price": 70,
+          "rating": 4.1,
+          "category": "Ice Cream",
+          "discount": 5,
+          "image": "chocolate-ice-cream.jpg"
         },
-        "image": "",
-        "rating": 0,
-        "noOfRatings": 0,
-        "menu": [],
-        "maxDiscount": 0,
-        "category": ""
+        {
+          "id": 2,
+          "name": "Strawberry Ice Cream",
+          "price": 70,
+          "rating": 3.7,
+          "category": "Ice Cream",
+          "discount": 10,
+          "image": "strawberry-ice-cream.jpg"
+        },
+        {
+          "id": 3,
+          "name": "Mango Ice Cream",
+          "price": 70,
+          "rating": 3.9,
+          "discount": 10,
+          "image": "mango-ice-cream.jpg"
+        },
+        {
+          "id": 4,
+          "name": "Vanilla Ice Cream",
+          "price": 70,
+          "rating": 4,
+          "discount": 10,
+          "image": "vanilla-ice-cream.jpg"
+        }
+      ],
+      "maxDiscount": 10,
+      "category": "Ice Cream"
+    },
+    {
+      "id": 3,
+      "name": "ttt restaurant",
+      "mobile": 9966669999,
+      "address": {
+        "street": "street1",
+        "pincode": 151515,
+        "city": "nagpur",
+        "state": "maharashtra",
+        "country": "india"
       },
-      {
-        "id": 5,
-        "name": "jjj restaurant",
-        "mobile": 6666665599,
-        "address": {
-            "street": "street3",
-            "pincode": 242424,
-            "city": "nashik",
-            "state": "maharashtra",
-            "country": "india"
-        },
-        "image": "",
-        "rating": 0,
-        "noOfRatings": 0,
-        "menu": [],
-        "maxDiscount": 0,
-        "category": ""
+      "image": "ttt-restaurant.png",
+      "rating": 0,
+      "noOfRatings": 0,
+      "menu": [],
+      "maxDiscount": 0,
+      "category": ""
+    },
+    {
+      "id": 4,
+      "name": "rrr restaurant",
+      "mobile": 6666663399,
+      "address": {
+        "street": "street6",
+        "pincode": 161616,
+        "city": "bengaluru",
+        "state": "karnataka",
+        "country": "india"
       },
-      {
-        "id": 6,
-        "name": "yyy restaurant",
-        "mobile": 9966999999,
-        "address": {
-            "street": "street9",
-            "pincode": 545454,
-            "city": "mumbai",
-            "state": "maharashtra",
-            "country": "india"
-        },
-        "image": "",
-        "rating": 0,
-        "noOfRatings": 0,
-        "menu": [],
-        "maxDiscount": 0,
-        "category": ""
-      }
-    ]
-  }
+      "image": "rrr-restaurant.png",
+      "rating": 0,
+      "noOfRatings": 0,
+      "menu": [],
+      "maxDiscount": 0,
+      "category": ""
+    },
+    {
+      "id": 5,
+      "name": "jjj restaurant",
+      "mobile": 6666665599,
+      "address": {
+        "street": "street3",
+        "pincode": 242424,
+        "city": "nashik",
+        "state": "maharashtra",
+        "country": "india"
+      },
+      "image": "jjj-restaurant.png",
+      "rating": 0,
+      "noOfRatings": 0,
+      "menu": [],
+      "maxDiscount": 0,
+      "category": ""
+    },
+    {
+      "id": 6,
+      "name": "yyy restaurant",
+      "mobile": 9966999999,
+      "address": {
+        "street": "street9",
+        "pincode": 545454,
+        "city": "mumbai",
+        "state": "maharashtra",
+        "country": "india"
+      },
+      "image": "yyy-restaurant.png",
+      "rating": 0,
+      "noOfRatings": 0,
+      "menu": [],
+      "maxDiscount": 0,
+      "category": ""
+    }
+  ]
+}
